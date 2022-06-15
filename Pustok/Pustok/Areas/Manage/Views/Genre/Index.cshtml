@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    int count = 0;
+}
+@model GenreViewModel
+<container>
+    <row>
+        <div class="col-md-10 mx-auto">
+            <a type="button" class="btn btn-primary" asp-controller="Genre" asp-action="Create">Create</a>
+        </div>
+        <div class="col-md-10 mx-auto">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">No</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @for (int i = 0; i < Model.Genres.Count; i++)
+                    {
+                        count++;
+                        <tr>
+                            <th scope="row">@count</th>
+                            <td>@Model.Genres[i].Name</td>
+                            <td>
+                                <a asp-controller="Genre" asp-action="Edit" asp-route-id="@Model.Genres[i].Id" type="button" class="btn btn-warning">Edit</a>
+                                <a asp-controller="Genre" asp-action="Delete" asp-route-id="@Model.Genres[i].Id" type="button" class="btn btn-danger sweet-delete">Delete</a>
+                            </td>
+                        </tr>
+
+                    }
+
+
+                </tbody>
+            </table>
+        </div>
+    </row>
+</container>
+

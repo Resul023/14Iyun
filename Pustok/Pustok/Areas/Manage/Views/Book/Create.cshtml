@@ -1,0 +1,125 @@
+﻿@model Books
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <form asp-action="create" method="post" enctype="multipart/form-data">
+
+                <div class="form-group">
+                    <label asp-for="Name" for="Name">Name</label>
+                    <input asp-for="Name" name="Name" type="text" class="form-control">
+                    <span asp-validation-for="Name" class="text-danger"></span>
+
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-4">
+                        <div class="form-group">
+                            <label asp-for="AuthorId">Author</label>
+                            <select class="form-control" asp-for="AuthorId" asp-items="new SelectList((List<Authors>)ViewBag.Authors,nameof(Authors.Id),nameof(Authors.FullName))">
+                            </select>
+                            <span asp-validation-for="AuthorId" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-4">
+                        <div class="form-group">
+                            <label asp-for="GenreId">Genre</label>
+                            <select class="form-control" asp-for="GenreId" asp-items="new SelectList((List<Genres>)ViewBag.Genres,nameof(Genres.Id),nameof(Genres.Name))">
+                            </select>
+                            <span asp-validation-for="GenreId" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group col-4">
+                        <div class="form-group">
+                            <label asp-for="TagIds">Tags</label>
+                            <select class="form-control" asp-for="TagIds" asp-items="new SelectList((List<Tag>)ViewBag.Tags,nameof(Tag.Id),nameof(Tag.Name))">
+                            </select>
+                            <span asp-validation-for="TagIds" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-4">
+                        <label asp-for="CostPrice" for="CostPrice">CostPrice </label>
+                        <input asp-for="CostPrice" name="CostPrice" type="number" class="form-control">
+                        <span asp-validation-for="CostPrice" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group col-4">
+                        <label asp-for="SalePrice" for="SalePrice">SalePrice </label>
+                        <input asp-for="SalePrice" name="SalePrice" type="number" class="form-control">
+                        <span asp-validation-for="SalePrice" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group col-4">
+                        <label asp-for="DiscountPercent" for="DiscountPercent">CostPrice </label>
+                        <input asp-for="DiscountPercent" name="DiscountPercent" type="number" class="form-control">
+                        <span asp-validation-for="DiscountPercent" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-4">
+                        <label asp-for="PageSize" for="PageSize">PageSize </label>
+                        <input asp-for="PageSize" name="PageSize" type="number" class="form-control">
+                        <span asp-validation-for="PageSize" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group col-4">
+                        <label asp-for="Rate" for="Rate">Rate </label>
+                        <input asp-for="Rate" name="Rate" type="number" class="form-control">
+                        <span asp-validation-for="Rate" class="text-danger"></span>
+                    </div>
+
+                    <div class="custom-control custom-checkbox small">
+                        <input asp-for="IsAvailable" type="checkbox" class="custom-control-input">
+                        <label asp-for="IsAvailable" class="custom-control-label">
+                            IsAvaliable
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="SubDesc" for="SubDesc">SubDesc</label>
+                    <input asp-for="SubDesc" name="SubDesc" type="text" class="form-control">
+                    <span asp-validation-for="SubDesc" class="text-danger"></span>
+
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Desc" for="Desc">Desc</label>
+                    <textarea asp-for="Desc" name="Desc" type="text" class="form-control"></textarea>
+                    <span asp-validation-for="Desc" class="text-danger"></span>
+
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-4">
+                        <label asp-for="PosterFile" for="PosterFile">PosterImage</label>
+                        <input asp-for="PosterFile">
+                        <span asp-validation-for="PosterFile " class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group col-4">
+                        <label asp-for="HoverFile" for="ImageFiles">HoverImage</label>
+                        <input asp-for="HoverFile">
+                        <span asp-validation-for="HoverFile" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group col-4">
+                        <label asp-for="ImageFiles" for="ImageFiles">Images</label>
+                        <input asp-for="ImageFiles">
+                        <span asp-validation-for="ImageFiles" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    int count = 0;
+}
+
+<div>
+    <row>
+        <div class="col-md-10 mx-auto">
+            <a type="button" class="btn btn-primary" asp-controller="Author" asp-action="Create">Create</a>
+        </div>
+        <div class="col-md-10 mx-auto">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">No</th>
+                        <th scope="col">FullName</th>
+                        <th scope="col">Age</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Authors aut in Model.Authors)
+                    {
+                        count++;
+                        <tr>
+                            <th scope="row">@count</th>
+                            <td>@aut.FullName</td>
+                            <td>@aut.Age</td>
+                            <td>
+                                <a asp-controller="Author" asp-action="Edit" asp-route-id="@aut.Id" type="button" class="btn btn-warning">Edit</a>
+                                <a asp-controller="Author" asp-action="Delete" asp-route-id="@aut.Id" type="button" class="btn btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </row>
+</div>
+

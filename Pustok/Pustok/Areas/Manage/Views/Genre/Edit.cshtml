@@ -1,0 +1,23 @@
+﻿@model Genres
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <form asp-action="Edit" method="post">
+
+                <div class="form-group">
+                    <label asp-for="Name" for="Name">Name</label>
+                    <input asp-for="Name" name="Name" type="text" class="form-control">
+                    <span asp-validation-for="Name" class="text-danger"></span>
+
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+

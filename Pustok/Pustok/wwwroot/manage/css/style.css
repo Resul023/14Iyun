@@ -1,0 +1,14 @@
+﻿.box-img {
+    position:relative;
+    margin:2px;
+    display:inline-block;
+}
+
+.delete-pic span {
+    position: absolute;
+    top: 0px;
+    left: 65px;
+    color: black;
+    cursor:pointer;
+}
+    

@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    int count = 0;
+}
+@model BookViewModel
+<container>
+    <row>
+        <div class="col-md-10 mx-auto">
+            <a type="button" class="btn btn-primary" asp-controller="Book" asp-action="Create">Create</a>
+        </div>
+        <div class="col-md-10 mx-auto">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">FullName</th>
+                        <th scope="col">CostPrice</th>
+                        <th scope="col">SalePrice</th>
+                        <th scope="col">AuthorName</th>
+                        <th scope="col">Genre</th>
+                        <th scope="col">Image</th>
+
+
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @for (int i = 0; i < Model.Books.Count; i++)
+                    {
+                        <tr>
+                            <td scope="col">@Model.Books[i].Name</td>
+                            <td scope="col">@Model.Books[i].CostPrice</td>
+                            <td scope="col">@Model.Books[i].SalePrice</td>
+                            <td scope="col">@Model.Books[i].Author.FullName</td>
+                            <td scope="col">@Model.Books[i].Genre.Name</td>
+
+                            
+                            <td>
+                                <a asp-controller="Book" asp-action="Edit" asp-route-id="@Model.Books[i].Id" type="button" class="btn btn-warning">Edit</a>
+                                <a asp-controller="Book" asp-action="Delete" asp-route-id="@Model.Books[i].Id" type="button" class="btn btn-danger sweet-delete">Delete</a>
+                            </td>
+
+                        </tr>
+
+                    }
+
+
+                </tbody>
+            </table>
+        </div>
+    </row>
+</container>
+
+

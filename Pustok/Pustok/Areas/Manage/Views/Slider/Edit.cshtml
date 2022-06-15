@@ -1,0 +1,42 @@
+﻿@model Slider
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <form asp-action="Edit" method="post" enctype="multipart/form-data">
+
+                <div class="form-group">
+                    <label asp-for="Title1" for="Title1">Title1 </label>
+                    <input asp-for="Title1" name="Title1" type="text" class="form-control">
+                    <span asp-validation-for="Title1" class="text-danger"></span>
+
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Title2" for="Title2">Title2</label>
+                    <input asp-for="Title2" name="Title2" type="text" class="form-control">
+                    <span asp-validation-for="Title2" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Order" for="Order">Order</label>
+                    <input asp-for="Order" name="Order" type="number" class="form-control">
+                    <span asp-validation-for="Order" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <input asp-for="ImageFile" class="input-image">
+                    <span asp-validation-for="ImageFile " class="text-danger"></span>
+                    <img src="~/upload/slider/@Model.SliderImage" width="250px" height="200px" class="important-image">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
