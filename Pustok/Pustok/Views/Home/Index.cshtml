@@ -1,5 +1,6 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    int slideCount = 2;
 }
 
 @model HomeViewModel
@@ -22,14 +23,16 @@
 
                 @for (int i = 0; i < Model.sliders.Count; i++)
                 {
-                    <div class="single-slide @(i==0?"bg-shade-whisper":" bg-ghost-white") ">
+                    bool isEven = slideCount % 2 == 0;
+                    slideCount++;
+                    <div class="single-slide @(isEven?"bg-shade-whisper":" bg-ghost-white") ">
                         <div class="container">
                             <div class="home-content text-center text-sm-left position-relative">
-                                <div class="hero-partial-image @(i==0?"image-right":" image-left") ">
+                                <div class="hero-partial-image @(isEven?"image-right":" image-left") ">
                                     <img src="~/assets/image/bg-images/@Model.sliders[i].SliderImage" alt="">
                                 </div>
-                                <div class="row  @(i==0?"no-gutters":"  align-items-center justify-content-start justify-content-md-end") ">
-                                    <div class="  @(i==0?"col-xl-6 col-md-6 col-sm-7":"col-lg-6 col-xl-7 col-md-6 col-sm-7")">
+                                <div class="row  @(isEven?"no-gutters":"  align-items-center justify-content-start justify-content-md-end") ">
+                                    <div class="  @(isEven?"col-xl-6 col-md-6 col-sm-7":"col-lg-6 col-xl-7 col-md-6 col-sm-7")">
                                         <div class="home-content-inner    @(i==0?"content-left-side":" content-right-side")">
                                             <h1>
                                                 @Model.sliders[i].Title1<br>
@@ -126,13 +129,13 @@
                         </li>
                     </ul>
                     <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane show active" id="shop" role="tabpanel" aria-labelledby="shop-tab">
+                        <div class="tab-pane active" id="shop" role="tabpanel" aria-labelledby="shop-tab">
                             <div class="product-slider multiple-row  slider-border-multiple-row  sb-slick-slider"
                                 data-slick-setting='{
                             "autoplay": true,
                             "autoplaySpeed": 8000,
                             "slidesToShow": 5,
-                            "rows":1,
+                            "rows":2,
                             "dots":true
                         }' data-slick-responsive='[
                             {"breakpoint":1200, "settings": {"slidesToShow": 3} },

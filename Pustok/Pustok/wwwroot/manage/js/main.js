@@ -34,7 +34,7 @@
     })
     
     $(".remove-img").click(function () {
-        console.log("hello")
+        
     })
 
    

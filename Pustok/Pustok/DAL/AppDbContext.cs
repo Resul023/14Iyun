@@ -20,6 +20,7 @@ namespace Pustok.DAL
         public DbSet<Featured> Featured { get; set; }
         public DbSet<Promotions> Promotion { get; set; }
         public DbSet<Tag> Tags { get; set; }
+        public DbSet<BookTag> BookTags { get; set; }
 
     }
 }

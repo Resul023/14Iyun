@@ -62,6 +62,31 @@ namespace Pustok.Migrations
                     b.ToTable("BookImage");
                 });
 
+            modelBuilder.Entity("Pustok.Models.BookTag", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("BookId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("BooksId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TagId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BooksId");
+
+                    b.HasIndex("TagId");
+
+                    b.ToTable("BookTags");
+                });
+
             modelBuilder.Entity("Pustok.Models.Books", b =>
                 {
                     b.Property<int>("Id")
@@ -236,6 +261,19 @@ namespace Pustok.Migrations
                     b.HasOne("Pustok.Models.Books", "Book")
                         .WithMany("BookImages")
                         .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Pustok.Models.BookTag", b =>
+                {
+                    b.HasOne("Pustok.Models.Books", "Books")
+                        .WithMany("BookTags")
+                        .HasForeignKey("BooksId");
+
+                    b.HasOne("Pustok.Models.Tag", "Tags")
+                        .WithMany("BookTags")
+                        .HasForeignKey("TagId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

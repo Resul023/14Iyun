@@ -16,7 +16,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="form-group col-6">
+                    <div class="form-group col-4">
                         <div class="form-group">
                             <label asp-for="AuthorId">Author</label>
                             <select class="form-control" asp-for="AuthorId" asp-items="new SelectList((List<Authors>)ViewBag.Authors,nameof(Authors.Id),nameof(Authors.FullName))">
@@ -25,12 +25,20 @@
                         </div>
                     </div>
 
-                    <div class="form-group col-6">
+                    <div class="form-group col-4">
                         <div class="form-group">
                             <label asp-for="GenreId">Genre</label>
                             <select class="form-control" asp-for="GenreId" asp-items="new SelectList((List<Genres>)ViewBag.Genres,nameof(Genres.Id),nameof(Genres.Name))">
                             </select>
                             <span asp-validation-for="GenreId" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group col-4">
+                        <div class="form-group">
+                            <label asp-for="TagIds">Tags</label>
+                            <select class="form-control" asp-for="TagIds" asp-items="new SelectList((List<Tag>)ViewBag.Tags,nameof(Tag.Id),nameof(Tag.Name))">
+                            </select>
+                            <span asp-validation-for="TagIds" class="text-danger"></span>
                         </div>
                     </div>
                 </div>
@@ -94,8 +102,8 @@
                         <label asp-for="PosterFile" for="PosterFile">PosterImage</label>
                         <input asp-for="PosterFile">
                         <span asp-validation-for="PosterFile " class="text-danger"></span>
-                     
-                    <img src="~/upload/book/@Model.BookImages.FirstOrDefault(x=>x.PosterStatus == true).Name " width="80" height="80">
+
+                        <img src="~/upload/book/@Model.BookImages.FirstOrDefault(x=>x.PosterStatus == true).Name " width="80" height="80">
 
 
                     </div>
@@ -111,20 +119,20 @@
                         <label asp-for="ImageFiles" for="ImageFiles">Images</label>
                         <input asp-for="ImageFiles">
                         <span asp-validation-for="ImageFiles" class="text-danger"></span>
-                        @foreach (var bk in Model.BookImages.Where(x=>x.PosterStatus == null))
+                        @foreach (var bk in Model.BookImages.Where(x => x.PosterStatus == null))
                         {
-                             <div class="box-img">
-                                 <span class="remove-img"><i class="fas fa-times"></i></span>
-                                 <img src="~/upload/book/@bk.Name" width="80" height="80">
-                                 <input type="hidden" name="ImageIds" value="@bk.Id" />
-                             </div>
-                           
+                            <div class="box-img">
+                                <span class="remove-img"><i class="fas fa-times"></i></span>
+                                <img src="~/upload/book/@bk.Name" width="80" height="80">
+                                <input type="hidden" name="ImageIds" value="@bk.Id" />
+                            </div>
+
                         }
                     </div>
                 </div>
-                
-                   
-                
+
+
+
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>

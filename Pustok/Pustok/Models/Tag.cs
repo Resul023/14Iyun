@@ -12,6 +12,6 @@ namespace Pustok.Models
         [Required]
         [StringLength(maximumLength: 70)]
         public string Name { get; set; }
-        public List<BookTag> BookTags { get; set; } = new List<BookTag>();
+        public List<BookTag> BookTags { get; set; } 
     }
 }

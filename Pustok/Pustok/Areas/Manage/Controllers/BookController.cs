@@ -82,7 +82,7 @@ namespace Pustok.Areas.Manage.Controllers
             book.BookImages.Add(bookHoverImg);
             AddImageFiles(book,book.ImageFiles);
 
-            if (book.TagIds!=null)
+            if (book.TagIds !=null)
             {
                 foreach (var tagId in book.TagIds)
                 {
@@ -100,7 +100,7 @@ namespace Pustok.Areas.Manage.Controllers
 
         public IActionResult Edit(int Id) 
         {
-            Books isExists = _context.Book.Include(x=>x.BookImages).FirstOrDefault(x => x.Id == Id);
+            Books isExists = _context.Book.Include(x=>x.BookImages).Include(x=>x.BookTags).FirstOrDefault(x => x.Id == Id);
 
             if (isExists == null)
             {
@@ -109,12 +109,14 @@ namespace Pustok.Areas.Manage.Controllers
             ViewBag.Authors = _context.Authors.ToList();
             ViewBag.Genres = _context.Genres.ToList();
             ViewBag.Tags = _context.Tags.ToList();
+
+            isExists.TagIds = isExists.BookTags.Select(x => x.TagId).ToList();
             return View(isExists);
         }
         [HttpPost]
         public IActionResult Edit(Books book)
         {
-            Books isExists = _context.Book.Include(x => x.BookImages).FirstOrDefault(x => x.Id == book.Id);
+            Books isExists = _context.Book.Include(x => x.BookImages).Include(x => x.BookTags).FirstOrDefault(x => x.Id == book.Id);
             if (isExists == null)
             {
                 return RedirectToAction("error", "home");
@@ -135,6 +137,10 @@ namespace Pustok.Areas.Manage.Controllers
             {
                 CheckHoverFile(book);
             }
+
+            CheckImageFile(book);
+            CheckTags(book);
+
             if (!ModelState.IsValid)
             {
                 ViewBag.Authors = _context.Authors.ToList();
@@ -143,6 +149,17 @@ namespace Pustok.Areas.Manage.Controllers
                 return View();
             }
             List<string> deletedFiles = new List<string>();
+
+            foreach (var tagId in book.TagIds.Where(x=>!isExists.BookTags.Any(bk=>bk.TagId == x)))
+            {
+                BookTag bkTag = new BookTag 
+                {
+                    TagId = tagId,
+                };
+                isExists.BookTags.Add(bkTag);
+            }
+            isExists.BookTags.RemoveAll(bk => !book.TagIds.Contains(bk.TagId));
+
             if (book.PosterFile != null)
             {
                 BookImage poster= isExists.BookImages.FirstOrDefault(x=>x.PosterStatus == true);
